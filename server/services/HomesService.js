@@ -32,7 +32,7 @@ class HomesService {
     if (home.price > body.price) {
       throw new BadRequest('Homes can only be bid up')
     }
-    home = await dbContext.Homes.findByIdAndUpdate(body.id, body, { new: true, runValidators: true})
+    home = await dbContext.Homes.findByIdAndUpdate(body.id, body, { new: true, runValidators: true })
     return home
   }
 
