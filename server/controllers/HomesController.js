@@ -1,9 +1,9 @@
-import { carsService } from '../services/CarsService'
 import BaseController from '../utils/BaseController'
+import { homesService } from '../services/HomesService'
 
-export class CarsController extends BaseController {
+export class HomesController extends BaseController {
   constructor() {
-    super('api/cars')
+    super('api/homes')
     this.router
       .get('', this.getAll)
       .get('/:id', this.getById)
@@ -14,52 +14,52 @@ export class CarsController extends BaseController {
   }
 
   /**
-   * Get all Cars
+   * Get all homes
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    * @param {import("express").NextFunction} next
    */
   async getAll(req, res, next) {
     try {
-      const cars = await carsService.getAll(req.query)
-      res.send(cars)
+      const homes = await homesService.getAll(req.query)
+      res.send(homes)
     } catch (error) {
       next(error)
     }
   }
 
   /**
-   * Get car by id
+   * Get home by id
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    * @param {import("express").NextFunction} next
    */
   async getById(req, res, next) {
     try {
-      const car = await carsService.getById(req.params.id)
-      res.send(car)
+      const home = await homesService.getById(req.params.id)
+      res.send(home)
     } catch (error) {
       next(error)
     }
   }
 
   /**
-   * Create Car
+   * Create home
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    * @param {import("express").NextFunction} next
    */
   async create(req, res, next) {
     try {
-      const car = await carsService.create(req.body)
-      res.send(car)
+      const home = await homesService.create(req.body)
+      res.send(home)
     } catch (error) {
       next(error)
     }
   }
 
   /**
-   * Edit Car
+   * Create home
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    * @param {import("express").NextFunction} next
@@ -67,33 +67,38 @@ export class CarsController extends BaseController {
   async edit(req, res, next) {
     try {
       req.body.id = req.params.id
-      // remove the price from the edit
-      const car = await carsService.edit(req.body)
-      res.send(car)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async bid(req, res, next) {
-    try {
-      const bid = { price: req.body.price, id: req.params.id }
-      const car = await carsService.bid(bid)
-      res.send(car)
+      const home = await homesService.edit(req.body)
+      res.send(home)
     } catch (error) {
       next(error)
     }
   }
 
   /**
-   * Delete Car
+   * Create home
+   * @param {import("express").Request} req
+   * @param {import("express").Response} res
+   * @param {import("express").NextFunction} next
+   */
+  async bid(req, res, next) {
+    try {
+      const bid = { price: req.body.price, id: req.params.id }
+      const home = await homesService.bid(bid)
+      res.send(home)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+   * Create home
    * @param {import("express").Request} req
    * @param {import("express").Response} res
    * @param {import("express").NextFunction} next
    */
   async destroy(req, res, next) {
     try {
-      await carsService.destroy(req.params.id)
+      await homesService.destroy(req.params.id)
       res.send({ message: 'Successfully Deleted Car' })
     } catch (error) {
       next(error)
