@@ -9,7 +9,8 @@ const Home = new Schema(
     imgUrl: { type: String, default: 'http://placehold.it/200x200' },
     bedrooms: { type: Number, required: true },
     bathrooms: { type: Number, required: true },
-    garage: { type: Number, required: false }
+    garage: { type: Number, required: false },
+    levels: { type: Number, required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
